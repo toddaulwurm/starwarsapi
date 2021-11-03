@@ -5,7 +5,8 @@ import {
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
+  useHistory
 } from "react-router-dom";
 import Home from './components/Home';
 import Number from './components/Number';
@@ -16,16 +17,36 @@ import Location from './components/Location';
 function App() {
   const Hello = props => {
     const { entered } = useParams();
+    const history = useHistory();
+    const goback = () => {
+      history.goBack()
+    }
     if(isNaN(+entered)){
-      return (<h1 style={{color: "brown"}}>Here is your word {entered}</h1>)
+      return (
+      <div>
+        <h1 style={{color: "brown"}}>Here is your word {entered}</h1>
+        <button onClick={goback}>Back</button>
+      </div>)
     }
     else{
-      return (<h1 style={{color: "green"}}>Here is your number {entered}</h1>)
+      return (
+      <div>
+        <h1 style={{color: "green"}}>Here is your number {entered}</h1>
+        <button onClick={goback}>Back</button>
+      </div>)
     }
   }
   const Special = props => {
     const { string1, string2, string3} = useParams();
-    return (<h1 style={{color: string2, backgroundColor: string3}}>Here is your {string1}</h1>)
+    const history = useHistory();
+    const goback = () => {
+      history.goBack()
+    }
+    return (
+    <div>
+      <h1 style={{color: string2, backgroundColor: string3}}>Here is your {string1}</h1>
+      <button onClick={goback}>Back</button>
+    </div>)
   }
   return (
     <BrowserRouter>
